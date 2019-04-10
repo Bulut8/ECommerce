@@ -1,0 +1,58 @@
+﻿
+@using Electro.BOL.Entities
+@model Product
+
+
+
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="products-tabs">
+                        <!-- tab -->
+                        <div id="tab1" class="tab-pane active">
+                            <div class="products-slick" data-nav="#slick-nav-1">
+                                <!-- product -->
+                                @foreach (Product item in ViewBag.Bil)
+                                {
+
+
+                                    <!-- product -->
+                                    <div class="product">
+                                        <div class="product-img">
+                                            <img src="@item.Pictures.FirstOrDefault(f=>f.PIndex==1).FPath" alt="">
+                                        </div>
+                                        <div class="product-body">
+                                            <p class="product-category">@item.Category.Name</p>
+                                            <h3 class="product-name"><a href="@Url.Action("Detail","Product",new {ID=item.ID })">@item.Name</a></h3>
+                                            <h4 class="product-price "><i class="fas fa-lira-sign"></i>@item.Price <del class="product-old-price"></del></h4>
+                                           
+                                            <div class="product-btns">
+                                                <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
+                                             
+                                                <a href="@Url.Action("Detail","Product",new {ID=item.ID })"> <button class="quick-view"><i class="fa fa-eye"></i></button> </a>
+                                           </div>
+                                        </div>
+                                        <div class="add-to-cart">
+                                            <button onclick="functAddCart(@item.ID,1)" class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> SEPETE EKLE</button>
+                                        </div>
+                                    </div>
+
+                                }
+                            </div>
+                            <div id="slick-nav-1" class="products-slick-nav"></div>
+                        </div>
+                        <!-- /tab -->
+                    </div>
+                </div>
+            </div>
+            <!-- Products tab & slick -->
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>

@@ -1,0 +1,142 @@
+﻿@using Electro.BOL.Entities
+@using Electro.Helpers
+@model IEnumerable<Category>
+   
+
+
+<header>
+    <!-- TOP HEADER -->
+    <div id="top-header">
+        <div class="container">
+
+
+
+
+            <ul class="header-links pull-right">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <span style="color:white">  @Session["AdSoyad"]</span>
+                    <ul class="cikisPaneli">
+
+
+                        <li><a href="@Url.Action("MemberAddress", "Member")">Üyelik Bilgilerim</a></li>
+                       
+                        <li><a href="@Url.Action("Logout","Member")">Çıkış</a></li>
+                    </ul>
+
+
+                }
+                else
+                {
+
+                    <li><a href="/Member/Index"><i class="fa fa-user-o"></i>@dil.Header.girisyap</a></li>
+
+                    <li><a href="/Member/Index?t=yeni">  <i class="fa fa-user-o"></i>@dil.Header.uyeol</a></li>
+                }
+            </ul>
+            <a href="@Url.Action("DilDegistir","Home",new { dil="tr",returnURL=Request.RawUrl})" style="color:white"> TR |</a>
+            <a href="@Url.Action("DilDegistir","Home",new { dil="en",returnURL=Request.RawUrl})" style="color:white"> EN </a>
+
+        </div>
+
+    </div>
+    <!-- /TOP HEADER -->
+    <!-- MAIN HEADER -->
+    <div id="header">
+        <!-- container -->
+        <div class="container">
+            <!-- row -->
+            <div class="row">
+                <!-- LOGO -->
+                <div class="col-md-3">
+                    <div class="header-logo">
+                        <a href="@Url.Action("Index","Home")" class="logo">
+                            <img src="/Content/img/logo.png" alt="">
+                        </a>
+
+                    </div>
+                </div>
+                <!-- /LOGO -->
+                <!-- SEARCH BAR -->
+                <div class="col-md-6">
+                    <div class="header-search">
+                        <form>
+                           
+                            <input  class="input" placeholder=""> 
+                            <button class="search-btn">@dil.Header.ara</button>
+                        </form>
+                    </div>
+                </div>
+                <!-- /SEARCH BAR -->
+                <!-- ACCOUNT -->
+                <div class="col-md-3 clearfix">
+                    <div class="header-ctn">
+                        <!-- Wishlist -->
+                        <div>
+                            <a href="#">
+                                <i class="fa fa-heart-o"></i>
+                                <span>Your Wishlist</span>
+                                <div class="qty">2</div>
+                            </a>
+                        </div>
+                        <!-- /Wishlist -->
+                        <!-- Cart -->
+                        <div class="dropdown">
+                            
+                            <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                                <i class="fa fa-shopping-cart"></i>
+                                <i class="qty">
+                                    <div class="productCount">@CartHelper.CartCount()</div>
+                                </i>
+                                <a href="@Url.Action("Index", "Cart")"> @dil.Header.sepet </a>
+                            </a>
+
+                        </div>
+                        <!-- /Cart -->
+                        <!-- Menu Toogle -->
+                        <div class="menu-toggle">
+                            <a href="#">
+                                <i class="fa fa-bars"></i>
+                                <span>Menu</span>
+                            </a>
+                        </div>
+                        <!-- /Menu Toogle -->
+                    </div>
+                </div>
+                <!-- /ACCOUNT -->
+            </div>
+            <!-- row -->
+        </div>
+        <!-- container -->
+    </div>
+    <!-- /MAIN HEADER -->
+</header>
+<nav id="navigation">
+    <!-- container -->
+    <div class="container">
+        <!-- responsive-nav -->
+        <div id="responsive-nav">
+            <!-- NAV -->
+            <ul class="main-nav nav navbar-nav">
+                <li class=""><a href="@Url.Action("Index","Home")">Ana Sayfa</a></li>
+
+                @foreach (Category hbk in Model.Where(w => w.ParentID == null))
+                {
+                <li>
+                    <a  href="@Url.Action("Store","Product",new { CatID=hbk.ID
+                            })" >
+                      @hbk.Name
+
+                    </a>
+                 
+                    
+                </li>
+
+                }
+            </ul>
+            <!-- /NAV -->
+        </div>
+        <!-- /responsive-nav -->
+    </div>
+    <!-- /container -->
+</nav>

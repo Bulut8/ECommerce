@@ -1,0 +1,144 @@
+﻿
+@using Electro.BOL.Entities
+@using Electro.ViewModels
+@model CategoryVM
+
+
+
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <!-- ASIDE -->
+            <div id="aside" class="col-md-3">
+                <!-- aside Widget -->
+                <div class="aside">
+                    <h3 class="aside-title">Kategoriler</h3>
+                    <div class="checkbox-filter">
+
+                        @foreach (Category item in Model.Categories)
+                        {
+                            <div class="input-checkbox">
+                                <input type="checkbox" id="category-6">
+                                <label for="category-6">
+                                    <span></span>
+                                    <a href="@Url.Action("Index","Home",new { CatID=item.ID })">   @item.Name   </a>
+                                    <small>(@item.Products.Count())</small>
+                                </label>
+                            </div>
+
+                        }
+
+
+
+
+
+                    </div>
+                </div>
+                <!-- /aside Widget -->
+                <!-- aside Widget -->
+                <div class="aside">
+                    <h3 class="aside-title">Fiyat</h3>
+                    <div class="price-filter">
+                        <div id="price-slider"></div>
+                        <div class="input-number price-min">
+                            <input id="minamount" type="number">
+                            <span class="qty-up">+</span>
+                            <span class="qty-down">-</span>
+                        </div>
+                        <span style="width:100px;height:30px;display:block;background-color:#444;color:#fff;text-align:center;font-size:14px;padding-top:6px;position:absolute;z-index:100;margin-left:60px; cursor:pointer" onmouseover="$(this).css('background-color', '#D10024')" onmouseout="$(this).css('background-color','#444')" onclick="location.href='/Home/Index?Price='+$('#minamount').val()+'_'+$('#maxamount').val()">FİLTRELE</span>
+
+                        <div class="input-number price-max">
+                            <input id="maxamount" type="number">
+                            <span class="qty-up">+</span>
+                            <span class="qty-down">-</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- /aside Widget -->
+                <!-- aside Widget -->
+
+
+                <div class="aside">
+                    <h3 class="aside-title" style="padding-top:30px;">Markalar</h3>
+                    <div class="checkbox-filter">
+
+                        @foreach (Brand item in Model.Brands)
+                        {
+                            <div class="input-checkbox">
+                                <input type="checkbox" id="brand-6">
+                                <label for="brand-6">
+                                    <span></span>
+                                    <a href="@Url.Action("Index","Home",new { BrandID=item.ID })">   @item.Name   </a>
+                                    <small>(@item.Products.Count())</small>
+                                </label>
+                            </div>
+                        }
+
+
+
+
+
+                    </div>
+                </div>
+                <!-- /aside Widget -->
+                <!-- aside Widget -->
+         
+                <!-- /aside Widget -->
+            </div>
+            <!-- /ASIDE -->
+            <!-- STORE -->
+            <div id="store" class="col-md-9">
+                <!-- store top filter -->
+             
+                <!-- store products -->
+                <div class="row">
+                    <!-- product -->
+                    <!-- /product -->
+                    <!-- product -->
+
+                    @foreach (Product item in Model.Products)
+                    {
+
+
+                        <div class="col-md-4 col-xs-6">
+                            <div class="product">
+                                <div class="product-img">
+                                    <img src="@item.Pictures.FirstOrDefault(a=> a.PIndex==1).FPath" alt="">
+                                  
+                                </div>
+                                <div class="product-body">
+                                    <p class="product-category">@item.Category.Name</p>
+                                    <h3 class="product-name"><a href="@Url.Action("Detail","Product",new {ID=item.ID })">@item.Name</a></h3>
+                                    <h4 class="product-price"><i class="fas fa-lira-sign"></i>@item.Price <del class="product-old-price"></del></h4>
+
+                                    <div class="product-btns">
+                                        <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
+
+                                        <a href="@Url.Action("Detail","Product",new {ID=item.ID })"> <button class="quick-view"><i class="fa fa-eye"></i></button> </a>
+                                    </div>
+                                </div>
+                                <div class="add-to-cart">
+                                    <button onclick="functAddCart(@item.ID,1)" class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> SEPETE EKLE</button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /product -->
+                    }
+                    <div class="clearfix visible-sm visible-xs"></div>
+
+
+                </div>
+                <!-- /store products -->
+                <!-- store bottom filter -->
+           
+                <!-- /store bottom filter -->
+            </div>
+            <!-- /STORE -->
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /SECTION -->

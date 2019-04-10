@@ -1,0 +1,179 @@
+﻿@using Electro.BOL.Entities
+
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+
+            <div class="col-md-7">
+                <!-- Billing Details -->
+                <div class="billing-details">
+
+                    <form action="/Member/MemberAddress" enctype="multipart/form-data" method="post">
+
+
+                        @*@using (Html.BeginForm("MemberAddress", "Member", FormMethod.Post))
+        {*@
+                        <div class="section-title">
+                            <h3 class="title">Adreslerim</h3>
+                        </div>
+
+                        <div class="form-group">
+                            <input class="input" type="text" name="Name" placeholder="Adres İsmi">
+                        </div>
+                        <div class="form-group">
+                            <input class="input" type="text" name="MemberAddress" placeholder="Mah/Sok">
+                        </div>
+                        <div class="form-group">
+                            <input class="input" type="text" name="City" placeholder="İlçe">
+                        </div>
+                        <div class="form-group">
+                            <input class="input" type="text" name="District" placeholder="Şehir">
+                        </div>
+                        <div class="form-group">
+                            <input class="input" type="hidden" name="MemberID" value="@Session["MemberID"].ToString()">
+                        </div>
+                        <input type="submit" class="primary-btn order-submit" value="Yeni Adres Ekle" />
+
+                        @*<div class="form-group">
+            <div class="input-checkbox">
+                <input type="checkbox" id="create-account">
+                <label for="create-account">
+                    <span></span>
+                    Create Account?
+                </label>
+                <div class="caption">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.</p>
+                    <input class="input" type="password" name="password" placeholder="Enter Your Password">
+                </div>
+            </div>
+        </div>*@
+                    </form>
+
+                    @*}*@
+                </div>
+                <!-- /Billing Details -->
+                <!-- Shiping Details -->
+          
+                <!-- /Shiping Details -->
+             
+                <!-- /Order notes -->
+            </div>
+
+            <!-- Order Details -->
+            <div class="col-md-5 order-details">
+                <div class="section-title text-center">
+                    <h3 class="title">Kayıtlı Adreslerim</h3>
+
+
+                </div>
+                <div class="order-summary">
+
+                    <div class="order-products">
+                        <div class="order-col">
+                            <ul>
+                                @if (ViewBag.Address != null)
+                                {
+                                    foreach (Address hba in ViewBag.Address)
+                                    {
+                                        <li><a href="@Url.Action("AddressUpdate","Member",new { ID=hba.ID })">@hba.Name</a></li>
+                                    }
+                                }
+                            </ul>
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+
+
+
+
+                @*<div class="payment-method">
+                    <div class="input-radio">
+                        <input type="radio" name="payment" id="payment-1">
+                        <label for="payment-1">
+                            <span></span>
+                            Direct Bank Transfer
+                        </label>
+                        <div class="caption">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        </div>
+                    </div>
+                    <div class="input-radio">
+                        <input type="radio" name="payment" id="payment-2">
+                        <label for="payment-2">
+                            <span></span>
+                            Cheque Payment
+                        </label>
+                        <div class="caption">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        </div>
+                    </div>
+                    <div class="input-radio">
+                        <input type="radio" name="payment" id="payment-3">
+                        <label for="payment-3">
+                            <span></span>
+                            Paypal System
+                        </label>
+                        <div class="caption">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        </div>
+                    </div>
+                </div>*@
+                @*<div class="input-checkbox">
+                    <input type="checkbox" id="terms">
+                    <label for="terms">
+                        <span></span>
+                        I've read and accept the <a href="#">terms & conditions</a>
+                    </label>
+                </div>*@
+                @*<a href="#" class="primary-btn order-submit">Place order</a>*@
+            </div>
+            <!-- /Order Details -->
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /SECTION -->
+<!-- NEWSLETTER -->
+@*<div id="newsletter" class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="newsletter">
+                    <p>Sign Up for the <strong>NEWSLETTER</strong></p>
+                    <form>
+                        <input class="input" type="email" placeholder="Enter Your Email">
+                        <button class="newsletter-btn"><i class="fa fa-envelope"></i> Subscribe</button>
+                    </form>
+                    <ul class="newsletter-follow">
+                        <li>
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-instagram"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-pinterest"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>*@
+<!-- /NEWSLETTER -->
+<!-- FOOTER -->

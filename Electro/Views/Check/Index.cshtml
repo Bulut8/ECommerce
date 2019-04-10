@@ -1,0 +1,100 @@
+﻿@using Electro.ViewModels
+@using Electro.BOL.Entities
+@model CartVM
+
+
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+
+            <div class="col-md-7">
+
+                <div class="billing-details">
+                  
+                    @*<form action="/Check/Index" enctype="multipart/form-data" method="post">*@
+
+                        <div class="section-title">
+                            <h3 class="title">ADRES BİLGİLERİ</h3>
+
+                        </div>
+                        <div class="section-title">
+                           
+                            @Html.DropDownList("checkoutAddress", new SelectList(Model.Addresses, "ID", "Name"), "Yeni Bir Adres Belirtmek İstiyorum", new { onchange = "functcheckoutAddress(this)", @class = "checkoutAddress" })
+
+                        </div>
+
+                        
+
+                            @*<div class="form-group">
+            <input  type="text" name="Name" class="Name" placeholder="Address Name">
+        </div>*@
+                        
+                            <div class="form-group">
+                                <input type="text" name="Address" class="Address input" placeholder="Mah/Sok">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" name="City" class="City input" placeholder="İlçe">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" name="District" class="District input" placeholder="Şehir">
+                            </div>
+                      
+                        
+                   
+                </div>
+
+
+
+
+
+
+            </div>
+
+            <!-- Order Details -->
+            <div class="col-md-5 order-details">
+                <div class="section-title text-center">
+                    <h3 class="title">Siparişiniz</h3>
+                </div>
+                <div class="order-summary">
+                    <div class="order-col">
+                        <div><strong>Ürün</strong></div>
+                        <div><strong>Toplam</strong></div>
+                    </div>
+
+
+                    @foreach (CartDetail hbcd in Model.CartDetails)
+                    {
+
+
+                        <div class="order-products">
+
+                            <div class="order-col">
+                                <div>@hbcd.Quantity x @hbcd.ProductName</div>
+                                <div>@(hbcd.Quantity * hbcd.Price) TL</div>
+                            </div>
+                        </div>
+                    }
+                    <div class="order-col">
+                        <div>Kargo</div>
+                        <div><strong>Ücretsiz</strong></div>
+                    </div>
+                    <div class="order-col">
+                        <div><strong>Toplam</strong></div>
+                        <div><strong class="order-total">@Model.CartDetails.Sum(s => s.Price * s.Quantity) TL</strong></div>
+                    </div>
+                </div>
+
+
+
+
+                <a href="#" class="primary-btn order-submit">Sipariş Ver</a>
+            </div>
+            <!-- /Order Details -->
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /SECTION -->

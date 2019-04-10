@@ -1,0 +1,128 @@
+﻿@using Electro.ViewModels
+@using Electro.BOL.Entities
+@model CartVM
+
+<div class="container mb-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr style="text-align:center">
+                            <th scope="col"> </th>
+                            <th scope="col">Ürün Adı</th>
+
+                            <th scope="col" class="text-center">Miktar</th>
+                            <th scope="col" class="text-right">Fiyat</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (CartDetail hbcd in Model.CartDetails)
+                        {
+
+
+                            <tr>
+                                <td><img src="@hbcd.FPath" style="width:110px;height:110px" /> </td>
+                                <td>@hbcd.ProductName</td>
+
+                                <td class="quy-col">
+                                    <div class="quantity">
+                                        <div class="pro-qty" style="cursor:pointer">
+                                            <span style="margin-left:170px" class="dec qtybtn" onclick="updateCart(@hbcd.ProductID,@hbcd.Quantity,this,-1)">- </span>
+                                            <input class="cartDetailValue" type="text" style="width:30px;text-align:center" value="@hbcd.Quantity">
+                                            <span class="inc qtybtn" onclick="updateCart(@hbcd.ProductID,@hbcd.Quantity,this,1)">+</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                @*<td><input class="form-control" type="text" value="@hbcd.Quantity" /></td>*@
+                                <td class="text-right">@(hbcd.Quantity * hbcd.Price)</td>
+                                <td class="text-right"><button class="btn btn-sm btn-danger"><i onclick="deleteCart(@hbcd.ProductID)" style="cursor:pointer" class="fa fa-trash"></i> </button> </td>
+                            </tr>
+
+
+                        }
+
+
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td><strong> TOPLAM</strong></td>
+                            <td class="text-right"><strong> @Model.CartDetails.Sum(s => s.Price * s.Quantity) TL</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col mb-2">
+            <div class="row">
+                <div class="col-sm-12 col-md-6 text-right">
+                    <a href="@Url.Action("Index","Home")">   <button class="btn btn-lg btn-block btn-success text-uppercase">Alışverişe Devam Et</button></a>
+                </div>
+                <div class="col-sm-12 col-md-6 text-right">
+                    <a href="@Url.Action("Index","Check")">   <button class="btn btn-lg btn-block btn-success text-uppercase">Alışverişi Tamamla</button></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Footer -->
+
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+
+            <div class="col-md-12">
+                <div class="row">
+                    <h2  style="text-align:center"  class="title"> ALIŞVERİŞE DEVAM EDİN</h2>
+
+                    <div class="products-tabs">
+                        <!-- tab -->
+                        <div id="tab1" class="tab-pane active">
+                            <div class="products-slick" data-nav="#slick-nav-1">
+                                @foreach (Product item in Model.BestSellerProducts)
+                                {
+
+
+                                    <!-- product -->
+                                    <div class="product">
+                                        <div class="product-img">
+                                            <img src="@item.Pictures.FirstOrDefault(f=>f.PIndex==1).FPath" alt="">
+                                        </div>
+                                        <div class="product-body">
+                                            <p class="product-category">@item.Category.Name</p>
+                                            <h3 class="product-name"><a href="@Url.Action("Detail","Product",new {ID=item.ID })">@item.Name</a></h3>
+                                            <h4 class="product-price"><i class="fas fa-lira-sign"></i>@item.Price <del class="product-old-price"></del></h4>
+
+                                            <div class="product-btns">
+                                                <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
+
+                                                <a href="@Url.Action("Detail","Product",new {ID=item.ID })"> <button class="quick-view"><i class="fa fa-eye"></i></button> </a>
+                                            </div>
+                                        </div>
+                                        <div class="add-to-cart">
+                                            <button onclick="functAddCart(@item.ID,1)" class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> SEPETE EKLE</button>
+                                        </div>
+                                    </div>
+
+                                }
+
+
+                            </div>
+                            <div id="slick-nav-1" class="products-slick-nav"></div>
+                        </div>
+                        <!-- /tab -->
+                    </div>
+                </div>
+            </div>
+            <!-- Products tab & slick -->
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>

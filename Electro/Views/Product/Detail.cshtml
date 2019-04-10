@@ -1,0 +1,193 @@
+﻿@using Electro.BOL.Entities
+@model Product
+
+
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <!-- Product main img -->
+            <div class="col-md-5 col-md-push-2">
+                <div id="product-main-img">
+
+                    @foreach (Picture item in Model.Pictures.OrderBy(o => o.PIndex))
+                    {
+                        <div class="product-preview">
+                            <img src="@item.FPath" alt="">
+                        </div>
+                    }
+
+
+
+                </div>
+            </div>
+            <!-- /Product main img -->
+            <!-- Product thumb imgs -->
+            <div class="col-md-2  col-md-pull-5">
+                <div id="product-imgs">
+
+
+                    @foreach (Picture item in Model.Pictures.OrderBy(o => o.PIndex))
+                    {
+                        <div class="product-preview">
+                            <img src="@item.FPath" alt="">
+                        </div>
+                    }
+
+
+                </div>
+            </div>
+            <!-- /Product thumb imgs -->
+            <!-- Product details -->
+            <div class="col-md-5">
+                <div class="product-details">
+                    <h2 class="product-name">@Model.Name</h2>
+                    <div>
+                      
+                      
+                    </div>
+                    <div>
+                        <h3 class="product-price"><i class="fas fa-lira-sign"></i>@Model.Price <del class="product-old-price"></del></h3>
+                        
+                        <span class="product-available">
+                            @*Available:*@ @if (Model.Stock > 0)
+                            {
+                                <span>Stokta Var</span>
+                            }
+                            else
+                            {
+                                <span>Tükendi</span>
+                            }
+
+                        </span>
+
+                    </div>
+                    <p>
+                    
+                       @Html.Raw(Model.Detail)
+
+                  </p>
+
+                    <div class="product-options">
+                       
+                    </div>
+
+                    <div class="add-to-cart">
+                       
+                        <button onclick="functAddCart(@Model.ID,1)" class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> SEPETE EKLE</button>
+                    </div>
+
+                  
+
+                    <ul class="product-links">
+                        <li>KATEGORİ:</li>
+                        <li>@Model.Category.Name</li>
+                       
+                    </ul>
+
+                    @*<ul class="product-links">
+                        <li>Share:</li>
+                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                        <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                        <li><a href="#"><i class="fa fa-envelope"></i></a></li>
+                    </ul>*@
+
+                </div>
+            </div>
+            <!-- /Product details -->
+            <!-- Product tab -->
+         
+            <!-- /product tab -->
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /SECTION -->
+<!-- Section -->
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+
+            <div class="col-md-12">
+                <div class="section-title text-center">
+                    <h3 class="title">Benzer Ürünler</h3>
+                </div>
+            </div>
+            @foreach (Product hbp in ViewBag.BenzerUrunler)
+            {
+
+
+                <!-- product -->
+                <div class="col-md-3 col-xs-6">
+                    <div class="product">
+                        <div class="product-img">
+                            <img src="@hbp.Pictures.FirstOrDefault(f=>f.PIndex==1).FPath" alt="">
+                           
+                        </div>
+                        <div class="product-body">
+                            <p class="product-category">@Model.Category.Name</p>
+                            <h3 class="product-name"><a href="#">@Model.Name</a></h3>
+                            <h4 class="product-price"><i class="fas fa-lira-sign"></i>@Model.Price <del class="product-old-price"></del></h4>
+                            <div class="product-rating">
+                            </div>
+                            <div class="product-btns">
+                                <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
+
+                                <a href="@Url.Action("Detail","Product",new {ID=hbp.ID })"> <button class="quick-view"><i class="fa fa-eye"></i></button> </a>
+                            </div>
+                        </div>  
+                        <div class="add-to-cart">
+                            <button onclick="functAddCart(@hbp.ID,1)" class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> SEPETE EKLE</button>
+                        </div>
+                    </div>
+                </div>
+
+            }
+            <!-- /product -->
+            <!-- product -->
+            <!-- /product -->
+
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /Section -->
+<!-- NEWSLETTER -->
+<div id="newsletter" class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="newsletter">
+                    <p>Sign Up for the <strong>NEWSLETTER</strong></p>
+                    <form>
+                        <input class="input" type="email" placeholder="Enter Your Email">
+                        <button class="newsletter-btn"><i class="fa fa-envelope"></i> Subscribe</button>
+                    </form>
+                    <ul class="newsletter-follow">
+                        <li>
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-instagram"></i></a>
+                        </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /NEWSLETTER -->
